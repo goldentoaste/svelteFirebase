@@ -2,8 +2,8 @@
     import Button from "$lib/components/generics/Button.svelte";
     import TextInput from "$lib/components/generics/TextInput.svelte";
     import PostItem from "$lib/components/message/PostItem.svelte";
+    import { newPost } from "$lib/firebase";
     import type { Post, VoteType } from "$lib/types";
-    import { deleteApp } from "firebase/app";
 
     let posts: { [id: string]: Post } = {
         "1": {
@@ -43,11 +43,10 @@
     let index = 1000;
     let postContent = "";
 
-    function addPost() {
+    async function addPost() {
         index += 1;
 
-        // TODO adapt for db
-        posts[`${index}`] = {
+        let post = {
             id: `${index}`,
             content: postContent,
             upvotes: 0,
@@ -55,6 +54,12 @@
             replies: [],
             userName: userName,
         };
+
+        const createdPost = await newPost(post);
+        console.log(createdPost);
+
+        posts[createdPost.id] = createdPost;
+        console.log(posts);
     }
 
     let upvoted: Set<string> = new Set(["1"]);
@@ -135,24 +140,31 @@
     </div>
 </div>
 
-{#each Object.values(posts) as post, index (post.id)}
-    <PostItem
-        {post}
-        voteStatus={getVoteStatus(post.id)}
-        on:vote={(e) => {
-            updateVotes(e.detail.postid, e.detail.type);
-        }}
-        on:comment={(e) => {
-            addComment(e.detail.postid, e.detail.content);
-        }}
-    />
-{/each}
+<div class="posts">
+    {#each Object.values(posts) as post, index (post.id)}
+        <PostItem
+            {post}
+            voteStatus={getVoteStatus(post.id)}
+            on:vote={(e) => {
+                updateVotes(e.detail.postid, e.detail.type);
+            }}
+            on:comment={(e) => {
+                addComment(e.detail.postid, e.detail.content);
+            }}
+        />
+    {/each}
+</div>
 
 <!-- Import and put the TodoList Component here, and give it the list of todoItems. -->
 
 <style>
     .hori {
         display: flex;
+        gap: 0.5rem;
+    }
+    .posts {
+        display: flex;
+        flex-direction: column-reverse;
         gap: 0.5rem;
     }
 </style>
