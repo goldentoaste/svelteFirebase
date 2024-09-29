@@ -9,11 +9,15 @@ export interface Post {
     upvotes:number;
     downvotes:number;
 
-    replies: Message[];
+    replies: Comment[];
 }
 
-export interface Message{
+export interface Comment{
     id:string;
     userName:string;
     content:string;
 }
+
+
+
+export type VoteType = "upvote"|"downvote"|undefined;
