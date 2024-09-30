@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Button from "$lib/components/generics/Button.svelte";
-    import TextInput from "$lib/components/generics/TextInput.svelte";
-    import PostItem from "$lib/components/message/PostItem.svelte";
+    import Button from "$lib/components/Button.svelte";
+    import TextInput from "$lib/components/TextInput.svelte";
+    import PostItem from "$lib/components/PostItem.svelte";
     import { addLike, getUserLikes, newPost, onPostChange, removeLike } from "$lib/firebase";
     import type {  Post } from "$lib/types";
     import { onMount } from "svelte";

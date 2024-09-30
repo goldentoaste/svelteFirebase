@@ -1,7 +1,4 @@
-
-
 <script>
-
     export let disabled = false;
     export let highLighted = false;
     export let style = "";
@@ -9,22 +6,18 @@
 
 <!-- bubbles on click -->
 <button class:disabled class:highLighted {disabled} on:click {style}>
-    <slot></slot>
+    <slot />
 </button>
 
-
 <style>
-
     button {
-        border: var(--focus) 2px solid ;
+        border: var(--focus) 2px solid;
         border-radius: 5px;
         background-color: var(--fg0);
         padding: 0.4rem 0.5rem;
         margin: 0.25rem 0.25rem;
 
         transition: all ease-out 250ms;
-
-
     }
 
     button:hover {

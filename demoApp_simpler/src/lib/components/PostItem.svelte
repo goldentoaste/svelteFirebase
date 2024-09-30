@@ -1,7 +1,7 @@
 <script lang="ts">
     import type {  Post } from "$lib/types";
     import { createEventDispatcher } from "svelte";
-    import Button from "../generics/Button.svelte";
+    import Button from "./Button.svelte";
 
     import { fly } from "svelte/transition";
 
