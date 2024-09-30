@@ -1,11 +1,9 @@
 <script lang="ts">
     import Button from "$lib/components/generics/Button.svelte";
     import TextInput from "$lib/components/generics/TextInput.svelte";
-    import Comment from "$lib/components/message/Comment.svelte";
     import PostItem from "$lib/components/message/PostItem.svelte";
     import {
         decreaseVote,
-        getAllPosts,
         getUserVotes,
         increaseVote,
         newComment,
@@ -14,7 +12,7 @@
     } from "$lib/firebase";
     import type { Post, VoteType } from "$lib/types";
     import { onMount } from "svelte";
-    import Layout from "../+layout.svelte";
+
 
     let _posts: { [id: string]: Post } = {
         "1": {
@@ -165,8 +163,9 @@
             disabled={userName.length == 0}
             on:click={() => {
                 addPost();
-            }}>Submit</Button
-        >
+            }}>
+            Submit
+        </Button>
     </div>
 </div>
 
