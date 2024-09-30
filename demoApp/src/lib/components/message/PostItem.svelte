@@ -1,9 +1,10 @@
 <script lang="ts">
-    import type { Post } from "$lib/types";
+    import type { Post, VoteType } from "$lib/types";
     import { createEventDispatcher } from "svelte";
     import Button from "../generics/Button.svelte";
     import TextInput from "../generics/TextInput.svelte";
     import Comment from "./Comment.svelte";
+    import { fly } from "svelte/transition";
 
     // take in a post object in order to "render" the Conpomnent
     export let post: Post;
@@ -21,26 +22,26 @@
         };
         vote: {
             postid: string;
-            type: "upvote" | "downvote" | undefined;
+            type: VoteType;
         };
     }>();
 
-    export let voteStatus: "upvote" | "downvote" | undefined = undefined;
+    export let voteStatus: VoteType = undefined;
 
-
+    export let disableComment = false;
 </script>
 
-<div class="messageParent">
+<div class="messageParent" transition:fly={{ x: -50, duration: 500 }}>
     <!-- use the post obj to fill in the blanks -->
     <p id="userName">{post.userName}</p>
     <p>{post.content}</p>
 
     <div id="votes">
         <Button
-            highLighted={voteStatus === "upvote"}
+            highLighted={voteStatus === "upvotes"}
             on:click={() => {
                 dispatch("vote", {
-                    type: "upvote",
+                    type: "upvotes",
                     postid: post.id,
                 });
             }}
@@ -49,10 +50,10 @@
         </Button>
 
         <Button
-            highLighted={voteStatus === "downvote"}
+            highLighted={voteStatus === "downvotes"}
             on:click={() => {
                 dispatch("vote", {
-                    type:"downvote",
+                    type: "downvotes",
                     postid: post.id,
                 });
             }}
@@ -73,8 +74,14 @@
 
     <div class="hori">
         <!-- extract the value variable and put it into a variable in this page so that we can interact with it. -->
-        <TextInput placeholder="Comment here!" bind:value={commentInput} style="flex:1;" />
+        <TextInput
+            placeholder="Comment here!"
+            bind:value={commentInput}
+            style="flex:1;"
+            disabled={disableComment}
+        />
         <Button
+            disabled={disableComment}
             on:click={() => {
                 // trigger the "comment" event on click
                 if (commentInput.length > 0) {

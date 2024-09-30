@@ -19,4 +19,4 @@ export interface Comment{
 
 
 
-export type VoteType = "upvote"|"downvote"|undefined;
+export type VoteType = "upvotes"|"downvotes"|undefined;

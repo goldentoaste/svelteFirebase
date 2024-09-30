@@ -3,12 +3,13 @@
 
 <script lang="ts">
     import type { Comment } from "$lib/types";
+    import { fly } from "svelte/transition";
 
     
     export let comment : Comment;
 </script>
 
-<div class="commentContainer">
+<div class="commentContainer" transition:fly={{x:-50, duration:500}}>
     <p id="username">
         {comment.userName}
     </p>

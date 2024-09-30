@@ -1,11 +1,22 @@
 <script lang="ts">
     import Button from "$lib/components/generics/Button.svelte";
     import TextInput from "$lib/components/generics/TextInput.svelte";
+    import Comment from "$lib/components/message/Comment.svelte";
     import PostItem from "$lib/components/message/PostItem.svelte";
-    import { newPost } from "$lib/firebase";
+    import {
+        decreaseVote,
+        getAllPosts,
+        getUserVotes,
+        increaseVote,
+        newComment,
+        newPost,
+        onPostChange,
+    } from "$lib/firebase";
     import type { Post, VoteType } from "$lib/types";
+    import { onMount } from "svelte";
+    import Layout from "../+layout.svelte";
 
-    let posts: { [id: string]: Post } = {
+    let _posts: { [id: string]: Post } = {
         "1": {
             id: "1",
             userName: "Alice",
@@ -40,14 +51,13 @@
         },
     };
 
-    let index = 1000;
+    let posts: { [id: string]: Post } = {};
+
     let postContent = "";
 
     async function addPost() {
-        index += 1;
-
         let post = {
-            id: `${index}`,
+            id: "",
             content: postContent,
             upvotes: 0,
             downvotes: 0,
@@ -65,12 +75,12 @@
     let upvoted: Set<string> = new Set(["1"]);
     let downvoted: Set<string> = new Set();
 
-    function getVoteStatus(postId: string) {
+    function getVoteStatus(postId: string, upvoted: Set<string>, downvoted: Set<string>) {
         if (upvoted.has(postId)) {
-            return "upvote";
+            return "upvotes";
         }
         if (downvoted.has(postId)) {
-            return "downvote";
+            return "downvotes";
         }
 
         return undefined;
@@ -79,22 +89,27 @@
     function updateVotes(postid: string, vote: VoteType) {
         // remove vote if there is already a vote selected
         const post = posts[postid];
+
         if (upvoted.has(post.id)) {
             upvoted.delete(post.id);
             post.upvotes -= 1;
-        } else if (vote == "upvote") {
+            decreaseVote(userName, posts[postid], "upvotes");
+        } else if (vote == "upvotes") {
             // increase if not previously increased
             upvoted.add(post.id);
             post.upvotes += 1;
+            increaseVote(userName, posts[postid], vote);
         }
 
         if (downvoted.has(post.id)) {
             downvoted.delete(post.id);
             post.downvotes -= 1;
-        } else if (vote === "downvote") {
+            decreaseVote(userName, posts[postid], "downvotes");
+        } else if (vote === "downvotes") {
             // decrease if not previously decreased
             downvoted.add(post.id);
             post.downvotes += 1;
+            increaseVote(userName, posts[postid], vote);
         }
 
         posts[postid] = post;
@@ -102,21 +117,34 @@
         // TODO report change to database
     }
 
-    let userName = "";
-    function addComment(postid: string, content: string) {
+    let userName = "Anon";
+
+    async function addComment(postid: string, content: string) {
         // TODO adapt this for database
         const post = posts[postid];
-        index += 1;
-        post.replies = [
-            ...post.replies,
-            {
-                id: `${index}`,
-                userName,
-                content,
-            },
-        ];
-
+        const comment = {
+            id: "",
+            userName,
+            content,
+        };
+        const createdComment = await newComment(post, comment);
+        post.replies.push(createdComment!);
         posts[postid] = post;
+    }
+
+    onMount(async () => {
+        onPostChange((changedPosts) => {
+            changedPosts.forEach((post) => {
+                posts[post.id] = post;
+            });
+        });
+    });
+
+    $: if (userName) {
+        getUserVotes(userName).then((userVotes) => {
+            upvoted = new Set(userVotes.upvotes);
+            downvoted = new Set(userVotes.downvotes);
+        });
     }
 </script>
 
@@ -131,8 +159,10 @@
             placeholder="Body of your post here..."
             style="flex:1;"
             bind:value={postContent}
+            disabled={userName.length == 0}
         />
         <Button
+            disabled={userName.length == 0}
             on:click={() => {
                 addPost();
             }}>Submit</Button
@@ -144,13 +174,14 @@
     {#each Object.values(posts) as post, index (post.id)}
         <PostItem
             {post}
-            voteStatus={getVoteStatus(post.id)}
+            voteStatus={getVoteStatus(post.id, upvoted, downvoted)}
             on:vote={(e) => {
                 updateVotes(e.detail.postid, e.detail.type);
             }}
             on:comment={(e) => {
                 addComment(e.detail.postid, e.detail.content);
             }}
+            disableComment={userName.length == 0}
         />
     {/each}
 </div>
