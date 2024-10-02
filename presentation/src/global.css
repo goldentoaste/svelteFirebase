@@ -1,0 +1,162 @@
+[data-theme='dark'] {
+    --bg0: #282828;
+    --bg1: #32302f;
+    --bg2: #32302f;
+    --bg3: #45403d;
+    --bg4: #45403d;
+    --bg5: #5a524c;
+
+    --fg0: #d4be98;
+    --fg1: #ddc7a1;
+
+    --red: #ea6962;
+    --orange: #e78a4e;
+    --yellow: #d8a657;
+    --green: #a9b665;
+    --aqua: #89b482;
+    --blue: #7daea3;
+    --purple: #d3869b;
+    --grey: #a89984;
+}
+
+[data-theme='light'] {
+    --bg0: #fbf1c7;
+    --bg1: #f4e8be;
+    --bg2: #f2e5bc;
+    --bg3: #eee0b7;
+    --bg4: #e5d5ad;
+    --bg5: #ddccab;
+
+    --fg0: #654735;
+    --fg1: #4f3829;
+
+    --orange: #c35e0a;
+    --yellow: #b47109;
+    --red: #c14a4a;
+    --green: #6c782e;
+    --aqua: #4c7a5d;
+    --blue: #45707a;
+    --purple: #945e80;
+    --grey: #7c6f64;
+}
+
+body {
+    --navBarHeight: 5rem;
+    --topPad: 7rem;
+    --glow: #5a524c;
+
+    background-color: var(--bg0);
+    padding-top: var(--topPad);
+
+    transition-property: background-color, color, padding-top;
+    transition-duration: 400ms;
+    transition-timing-function: ease-out;
+
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+
+    color: var(--fg1);
+
+
+    background-size: 100px 100px;
+    background-image:
+        linear-gradient(to right, var(--bg2) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--bg2) 1px, transparent 1px);
+
+    margin: 0;
+}
+
+br {
+    display: block;
+    margin: 5px 0;
+}
+
+h1 {
+    font-weight: 500;
+    margin: 1rem;
+    margin-left: 0;
+}
+
+h2 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+h2.title {
+    color: var(--orange);
+}
+
+h1.title {
+    color: var(--orange);
+}
+
+.hor {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin: 0.5rem;
+}
+
+.ver {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.5rem;
+}
+
+.horDiv {
+    width: 100%;
+
+    border-bottom: 2px solid var(--bg5);
+}
+
+.verDiv {
+    height: auto;
+
+    border-right: 2px solid var(--bg5);
+}
+
+input,
+button {
+    font-size: large;
+    padding: 0.5rem;
+}
+
+p {
+    font-size: larger;
+}
+
+/* span {
+    font-size: larger;
+} */
+
+ul {
+    margin: 0.5rem;
+}
+
+li {
+    margin: 0.25rem 0;
+    vertical-align: middle;
+    font-size: large;
+}
+
+a {
+    text-decoration: underline;
+    color: var(--fg1);
+
+}
+
+a:visited {
+    color: var(--yellow);
+
+}
+
+
+pre {
+    border: 2px solid var(--bg5)
+}
+
+span.inline {
+    color: var(--orange);
+}
