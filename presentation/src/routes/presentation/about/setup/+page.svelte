@@ -44,7 +44,7 @@
     <li>
         ! Clone the <a
             target="_blank"
-            href="https://github.com/goldentoaste/svelte_todo_template"
+            href="https://github.com/goldentoaste/sveltefirebase_template"
             >Template Code</a
         > here using git.
     </li>
@@ -53,6 +53,8 @@
         <img src="/vercel.png" alt="vercel logo" />
         Prepare Github logins for Vercels
     </li>
+
+    <li>Have a Google Account, and try logging to into <a href="https://firebase.google.com/">Firebase Console</a>, no credit cards needed. I think. </li>
 </ul>
 
 <div class="horDiv" />
@@ -62,7 +64,7 @@
     <p>
         <a
             target="_blank"
-            href="https://github.com/goldentoaste/svelte_todo_template"
+            href="https://github.com/goldentoaste/sveltefirebase_template"
         >
             Clone the repo here</a
         ><br />
@@ -73,6 +75,7 @@
         <br /> <br />
         On the Github page there should be a green button that says "Use this template",
         which you can use to create a new repo using the template code.
+        (Using last workshop's images)
     </p>
     <img src="/git_template.png" alt="" style="width: 100%;" />
     <img src="/git_template2.png" alt="" style="width: 400px;" />

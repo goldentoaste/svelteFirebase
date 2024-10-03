@@ -33,21 +33,22 @@
             ],
         },
         {
-            title: "What is Svelte?",
-            route: "what_is_svelte",
+            title: "What is a tech stack?",
+            route: "techstack",
             items: [
+             
                 {
-                    title: "So what is svelte?",
-                    href: "what_is_svelte",
+                    title: "What is a tech stack?",
+                    href: "what_is_techstack",
                 },
                 {
-                    title: "Pros and Cons",
-                    href: "pros_cons",
+                    title: "Stacks can be complicated",
+                    href: "complicated_stacks",
                 },
                 {
-                    title: "Svelte file structure",
-                    href: "svelte_structure",
-                },
+                    title:"Keep it simple",
+                    href:"simple_stack"
+                }
             ],
         },
         {
