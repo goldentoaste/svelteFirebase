@@ -27,7 +27,7 @@ A Big problem with "choosing" a stack is that realistically there are many more 
     <li>And the list goes on...</li>
 </ul>
 
-<p>In hackathons, as hobbyists, its best to just keep it simple. We are doing an one off project, security and scalbility is not    </p>
+<p>In hackathons, as hobbyists, its best to just keep it simple. We are doing an one off project, security and scalbility is not at all a concern.</p>
 
 
 <style>

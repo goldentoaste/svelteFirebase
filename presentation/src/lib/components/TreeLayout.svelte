@@ -159,6 +159,7 @@
         max-height: 70vh;
 
         padding-bottom: 1rem;
+        scrollbar-gutter: stable;
     }
 
     .title {

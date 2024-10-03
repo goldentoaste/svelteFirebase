@@ -1,9 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import Button from "$lib/components/Button.svelte";
-    import TreeLayout, {
-        type Chapter,
-    } from "$lib/components/TreeLayout.svelte";
+    import TreeLayout, { type Chapter } from "$lib/components/TreeLayout.svelte";
 
     import { prevUrl, nextUrl } from "$lib/components/TreeLayout.svelte";
     import { presentMode } from "$lib/globals";
@@ -36,7 +34,6 @@
             title: "What is a tech stack?",
             route: "techstack",
             items: [
-             
                 {
                     title: "What is a tech stack?",
                     href: "what_is_techstack",
@@ -46,15 +43,16 @@
                     href: "complicated_stacks",
                 },
                 {
-                    title:"Keep it simple",
-                    href:"simple_stack"
-                }
+                    title: "Keep it simple",
+                    href: "simple_stack",
+                },
             ],
         },
         {
             title: "Svelte Basics",
             route: "svelte_basics",
             items: [
+                { title: "File Structure", href: "svelte_structure" },
                 {
                     title: "Variables and attributes",
                     href: "variables",
@@ -93,31 +91,14 @@
                 },
             ],
         },
+       
         {
-            title: "What is SvelteKit?",
-            route: "what_is_sveltekit",
+            title: "Build App",
+            route: "build_app",
             items: [
                 {
-                    title: "Intro",
-                    href: "intro",
-                },
-                {
-                    title: "Project Structure",
-                    href: "project_structure",
-                },
-                {
-                    title: "Routing",
-                    href: "routing",
-                },
-            ],
-        },
-        {
-            title: "Todo App",
-            route: "build_todo",
-            items: [
-                {
-                    title: "Lets build the todo app!",
-                    href: "todo",
+                    title: "Lets build the app!",
+                    href: "app",
                 },
             ],
         },

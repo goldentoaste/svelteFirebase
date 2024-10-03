@@ -57,7 +57,7 @@
     <ButtonGroup {selectedIndex} buttonParams={items} />
 
     <div style="margin-left:auto; display:flex; gap: 1rem">
-        <Toggle bind:toggleOn={$presentMode}>Present Mode</Toggle>
+        <Toggle bind:toggleOn={$presentMode}>Presentation Mode</Toggle>
 
         <ThemeButton />
     </div>
