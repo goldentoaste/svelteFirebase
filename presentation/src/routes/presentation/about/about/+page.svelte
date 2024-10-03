@@ -26,3 +26,5 @@
     <li>Deploy the web app to Vercel (It's shockly easy)</li>
 </ul>
 
+<h2 class="title">Demo</h2>
+We will be making a simpler version of <a href="https://svelte-firebase-two.vercel.app/">This.</a>
